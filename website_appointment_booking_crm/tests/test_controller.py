@@ -92,6 +92,22 @@ class TestWebsiteAppointmentBookingCrm(HttpCase):
         self.assertTrue(mails)
         self.assertIn("request-test@example.com", mails[0].email_to)
 
+    def test_booking_request_lead_has_company_and_phone(self):
+        """The company and phone given reach the lead through the contact."""
+        self._request(
+            {
+                "name": "NZ Requester",
+                "email": "request-company@example.com",
+                "company": "Kiwi Ltd",
+                "phone": "+64 9 000 0000",
+                "visitor_tz": "Pacific/Auckland",
+            }
+        )
+        lead = self._lead_for("request-company@example.com")
+        self.assertEqual(lead.partner_id.company_name, "Kiwi Ltd")
+        self.assertEqual(lead.partner_name, "Kiwi Ltd")
+        self.assertEqual(lead.phone, "+64 9 000 0000")
+
     def test_booking_request_missing_name_redirects_with_error(self):
         """Submitting without name/email redirects with an error code."""
         response = self._request(
