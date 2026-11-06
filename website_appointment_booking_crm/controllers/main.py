@@ -208,7 +208,9 @@ class WebsiteAppointmentBookingCrm(WebsiteAppointmentBooking):
         if not email:
             return self._redirect_error(slug, "invalid_email")
 
-        partner = self._get_or_create_partner(name, email)
+        partner = self._get_or_create_partner(
+            name, email, **self._get_optional_contact_values(kwargs)
+        )
         lead = (
             request.env["crm.lead"]
             .sudo()
