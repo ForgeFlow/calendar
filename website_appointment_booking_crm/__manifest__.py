@@ -5,7 +5,7 @@
     "name": "Website Appointment Booking - CRM",
     "summary": "Turn out-of-hours booking requests from the public "
     "booking page into CRM leads",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "development_status": "Beta",
     "category": "Appointments",
     "website": "https://github.com/OCA/calendar",

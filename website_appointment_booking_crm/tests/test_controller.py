@@ -90,7 +90,9 @@ class TestWebsiteAppointmentBookingCrm(HttpCase):
             ]
         )
         self.assertTrue(mails)
-        self.assertIn("request-test@example.com", mails[0].email_to)
+        self.assertIn(
+            "request-test@example.com", mails[0].recipient_ids.mapped("email")
+        )
 
     def test_booking_request_lead_has_company_and_phone(self):
         """The company and phone given reach the lead through the contact."""
